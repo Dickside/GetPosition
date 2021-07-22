@@ -28,10 +28,12 @@ namespace WindowsFormsApp1
             string line = "";
             using (WebClient wc = new WebClient())
                 line = wc.DownloadString($"http://ipwhois.app/json/{textBox1.Text}");
-            Match match = Regex.Match(line, "\"country\":\"(.*?)\",(.*?)\"city\":\"(.*?)\",(.*?)\"latitude\":(.*?),(.*?)\"longitude\":(.*?),");
-            label1.Text = match.Groups[1].Value + "\n" + match.Groups[3].Value;
-            textBox2.Text = match.Groups[5].Value;
-            textBox3.Text = match.Groups[7].Value;
+            Match match = Regex.Match(line, "\"ip\":\"(.*?)\",(.*?)\"country\":\"(.*?)\",(.*?)\"city\":\"(.*?)\",(.*?)\"latitude\":(.*?),(.*?)\"longitude\":(.*?),");
+            label1.Text = match.Groups[3].Value + "\n" + match.Groups[5].Value;
+            label3.Text = match.Groups[1].Value;
+            label2.Text = "Если вы не указывали IP"+"\n" + "адрес,то поиск выполнится по"+"\n"+"вашему IP";
+            textBox2.Text = match.Groups[7].Value;
+            textBox3.Text = match.Groups[9].Value;
             
         }
 
@@ -84,6 +86,6 @@ namespace WindowsFormsApp1
             
         }
 
-       
+        
     }
 }
